@@ -21,6 +21,21 @@ Bu çalışma kapsamında toplanan veri seti, İstanbul’daki bireylerin ve han
 
 ---
 
+## ⚙️ HTS Verisi İşleme Süreci
+
+HTS verileri kullanılmadan önce çeşitli temizleme ve filtreleme adımlarından geçirilmiştir. Aşağıdaki tabloda, işlem adımları ve veri sayısındaki değişim özetlenmiştir:
+
+| 🔢 **Adım No** | 🔄 **Aşama** | 📝 **Açıklama** | 🧱 **TripLeg (Birlikte)** | 🚳 **Trip (Birlikte)** | 🧱 **TripLeg** | 🚳 **Trip** |
+|---------------|--------------|----------------|--------------------------|------------------------|---------------|-------------|
+| 1 | Ham Veri | Başlangıçta tüm birlikte yolculuk kayıtları dahil olmak üzere ham veri kullanıldı. | 245.254 | 235.540 | 212.242 | 207.173 |
+| 2 | İşleme | Birlikte yolculuk yapan - diğer kişilerin veriden silinmesi. (Diğer yolcuların p_id'si olmadığı için Trip verisine etkisi yok.) | 240.891 | 235.540 | **Yok** | **Yok** |
+| 3 | İşleme | `travel_time` değeri boş olan ve `vehicle_time < 0` olan kayıtlar silindi. Bu işlem **trip** bazında yapıldı. | 240.800 | 235.468 | 212.152 | 207.102 |
+| 4 | İşleme | `travel_time`, belirlenen zaman aralıklarına uymayan trip kayıtları çıkarıldı: (1-5, 5-10, ..., 225-240 dakika) | 238.883 | 233.670 | 210.428 | 205.481 |
+
+> 📌 *Bu işlemler sonucunda analiz için daha güvenilir ve tutarlı bir veri seti elde edilmiştir.*
+
+---
+
 ## 🎯 Neden Önemli?
 
 - İstanbul genelinde ulaşım talebini **alan bazında analiz etme** imkânı sunar.  
@@ -46,3 +61,4 @@ HTS verileri, aşağıdaki analiz modüllerinin temelini oluşturmaktadır:
 - 📌 Veri Toplama Süreci ve Metodolojisi  
 - 🏞️ İlçelere Göre Seyahat Davranışları  
 - 🌍 Öne Çıkan Bulgular ve Stratejik Öneriler
+
